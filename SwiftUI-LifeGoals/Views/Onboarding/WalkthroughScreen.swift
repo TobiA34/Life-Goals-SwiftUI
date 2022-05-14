@@ -15,16 +15,16 @@ struct WalkthroughScreen: View {
             //Changing between views
             
             if currentPage == 1 {
-                ScreenView(image: "image1", title: "Create Goal", detail: "On this page you can create your life goal and save them.", bgcolor: Color("grey"))
+                ScreenView(image: "CreateGoal", title: "Create Goal", detail: "On this page you can create your life goal and save them.", bgcolor: Color("grey"))
                     .transition(.scale)
 
             } else if currentPage == 2 {
-                ScreenView(image: "image2", title: "Create Category", detail: "On this page you can create your category  and save them.", bgcolor: Color("grey"))
+                ScreenView(image: "categories", title: "Create Category", detail: "On this page you can create your category  and save them.", bgcolor: Color("grey"))
                     .transition(.scale)
 
 
             } else if currentPage == 3 {
-                ScreenView(image: "image3", title: "Settings", detail: "On this page you can see your settings.", bgcolor: Color("grey"))
+                ScreenView(image: "settings", title: "Settings", detail: "On this page you can see your settings.", bgcolor: Color("grey"))
                     .transition(.scale)
 
 
@@ -58,9 +58,9 @@ struct WalkthroughScreen: View {
                                 
                             
                             Circle()
-                                .trim(from: 0, to: 0.3)
+                                .trim(from: 0, to: CGFloat(currentPage) / CGFloat(totalPages))
                                 .stroke(Color.black,lineWidth: 4)
-                                .rotationEffect(.init(degrees: -20))
+                                .rotationEffect(.init(degrees: -90))
                             
                         }
                             .padding(-15)
@@ -78,6 +78,7 @@ struct ScreenView: View {
     var title: String
     var detail: String
     var bgcolor: Color
+    
     
     @AppStorage("currentPage") var currentPage = 1
     
@@ -129,18 +130,21 @@ struct ScreenView: View {
             Image(image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
+                .padding(40)
             
             
             Text(title)
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.black)
+               
             
             
             Text(detail)
                 .fontWeight(.semibold)
                 .kerning(1.3)
                 .multilineTextAlignment(.center)
+                .padding(20)
             
             //Minimum Spacing When Phone is reducing...
             
